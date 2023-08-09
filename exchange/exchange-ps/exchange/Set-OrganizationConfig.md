@@ -1223,7 +1223,7 @@ The ConnectorsEnabled parameter specifies whether to enable or disable all conne
 - $true: Connectors are enabled. This is the default value.
 - $false: Connectors are disabled.
 
-The workloads that are affected by this parameter are Outlook, SharePoint, Teams, and Yammer.
+The workloads that are affected by this parameter are Outlook, SharePoint, Teams, and Viva Engage.
 
 ```yaml
 Type: Boolean
@@ -1308,7 +1308,7 @@ Accept wildcard characters: False
 ### -ConnectorsEnabledForYammer
 This parameter is available only in the cloud-based service.
 
-The ConnectorsEnabledForYammer parameter specifies whether to enable or disable connected apps on Yammer. Valid values are:
+The ConnectorsEnabledForYammer parameter specifies whether to enable or disable connected apps on Viva Engage. Valid values are:
 
 - $true: Connectors are enabled. This is the default value.
 - $false: Connectors are disabled.
@@ -1518,7 +1518,7 @@ The valid input range for this parameter is from 0 through 2199023254529 bytes(2
 
 ```yaml
 Type: Unlimited
-Parameter Sets:  ShortenEventScopeParameter, AdfsAuthenticationParameter, AdfsAuthenticationRawConfiguration
+Parameter Sets: ShortenEventScopeParameter, AdfsAuthenticationParameter, AdfsAuthenticationRawConfiguration
 Aliases:
 Applicable: Exchange Server 2013, Exchange Server 2016, Exchange Server 2019, Exchange Online
 
@@ -2089,7 +2089,7 @@ This parameter is available only in the cloud-based service.
 
 The FindTimeAutoScheduleDisabled parameter controls automatically scheduling the meeting once a consensus is reached in meeting polls using the FindTime Outlook add-in. Valid values are:
 
-- $true:  Reaching a consensus for the meeting time doesn't automatically schedule the meeting, and the meeting organizer can't change this setting (Off).
+- $true: Reaching a consensus for the meeting time doesn't automatically schedule the meeting, and the meeting organizer can't change this setting (Off).
 - $false: By default, reaching a consensus for the meeting time doesn't automatically schedule the meeting, but meeting organizer is allowed to turn on this setting.
 
 This setting overrides individual user settings.
@@ -3175,7 +3175,7 @@ Accept wildcard characters: False
 ```
 
 ### -PublicFoldersEnabled
-The PublicFoldersEnabled parameter specifies how public folders are deployed in your organization. This parameter uses one of the following values.
+The PublicFoldersEnabled parameter specifies how public folders are deployed in your organization. Valid values are:
 
 - Local: The public folders are deployed locally in your organization.
 - Remote: The public folders are deployed in the remote forest.
@@ -3195,10 +3195,10 @@ Accept wildcard characters: False
 ```
 
 ### -PublicFolderShowClientControl
-The PublicFolderShowClientControl parameter enables or disables access to public folders in Microsoft Outlook. Valid values are:
+The PublicFolderShowClientControl parameter enables or disables the control access feature for public folders in Microsoft Outlook. Valid values are:
 
-- $true: Users can access public folders in Outlook if the PublicFolderClientAccess parameter on the Set-CASMailbox cmdlet is set to the value $true (the default value is $false).
-- $false: User can't access public folders in Outlook. This is the default value.
+- $true: User access to public folders in Outlook is controlled by the value of the PublicFolderClientAccess parameter on the Set-CASMailbox cmdlet (the default value is $false).
+- $false: This is the default value. User access to public folders in Outlook is enabled (the control access feature is disabled). The value of the PublicFolderClientAccess parameter on the Set-CASMailbox cmdlet is meaningless.
 
 ```yaml
 Type: Boolean
@@ -3334,15 +3334,12 @@ Accept wildcard characters: False
 ### -SendFromAliasEnabled
 This parameter is available only in the cloud-based service.
 
-Note: This feature is in Preview and has not yet been officially released. Do not enable it if you are not willing to lose certain functionality or have a degraded experience.
-An official announcement will be released via the EHLO blog and Message Center in due time.
+The SendFromAliasEnabled parameter allows mailbox users to send messages using aliases (proxy addresses). Valid values are:
 
-The SendFromAliasEnabled parameter allows mailbox users to send messages using aliases (proxy addresses). It does this by disabling the rewriting of aliases to their primary SMTP address. This change is implemented in the Exchange Online service. At the same time, Outlook clients are making changes to natively support aliases for sending and receiving messages. Even without an updated client, changes in behavior may be seen for users using any email client as the setting affects all messages sent and received by a mailbox. Valid values are:
-
-- $true: Aliases on messages will no longer be rewritten to their primary SMTP addresses. Compatible Outlook clients will allow sending from aliases and replying to aliases.
+- $true: Aliases on messages will no longer be rewritten to their primary SMTP addresses. Compatible Outlook clients will allow sending from aliases and replying to aliases. Even without an updated Outlook client, users might see changes in behavior because the setting affects all messages sent and received by a mailbox.
 - $false: Aliases on messages sent or received will be rewritten to their primary email address. This is the default value.
 
-For more information about the availability of the Outlook for the web changes, see the [Microsoft 365 roadmap item](https://www.microsoft.com/microsoft-365/roadmap?filters=Exchange&searchterms=59437). For Outlook for Windows, see this [Microsoft 365 roadmap item](https://www.microsoft.com/microsoft-365/roadmap?filters=Outlook&searchterms=64123).
+For more information about the availability of the feature in Outlook on the web, see the [Microsoft 365 roadmap item](https://www.microsoft.com/microsoft-365/roadmap?filters=Exchange&searchterms=59437). For Outlook for Windows, see this [Microsoft 365 roadmap item](https://www.microsoft.com/microsoft-365/roadmap?filters=Outlook&searchterms=64123).
 
 ```yaml
 Type: Boolean

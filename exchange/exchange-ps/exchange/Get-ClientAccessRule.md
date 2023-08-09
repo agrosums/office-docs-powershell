@@ -12,6 +12,9 @@ ms.reviewer:
 # Get-ClientAccessRule
 
 ## SYNOPSIS
+> [!NOTE]
+> Beginning in October 2022, we've disabled access to client access rules for all existing Exchange Online organizations that weren't using them. In September 2024, support for client access rules will end for all Exchange Online organizations. For more information, see [Update: Deprecation of Client Access Rules in Exchange Online](https://techcommunity.microsoft.com/t5/exchange-team-blog/update-deprecation-of-client-access-rules-in-exchange-online/ba-p/3790165).
+
 This cmdlet is functional only in Exchange Server 2019 and in the cloud-based service. Some parameters and settings may be exclusive to one environment or the other.
 
 Use the Get-ClientAccessRule cmdlet to view client access rules. Client access rules help you control access to your cloud-based organization based on the properties of the connection.

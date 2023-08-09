@@ -42,6 +42,7 @@ Set-CalendarProcessing [-Identity] <MailboxIdParameter>
  [-DeleteNonCalendarItems <Boolean>]
  [-DeleteSubject <Boolean>]
  [-DomainController <Fqdn>]
+ [-EnableAutoRelease <Boolean>]
  [-EnableResponseDetails <Boolean>]
  [-EnforceCapacity <Boolean>]
  [-EnforceSchedulingHorizon <Boolean>]
@@ -51,8 +52,9 @@ Set-CalendarProcessing [-Identity] <MailboxIdParameter>
  [-MaximumDurationInMinutes <Int32>]
  [-MinimumDurationInMinutes <Int32>]
  [-OrganizerInfo <Boolean>]
+ [-PostReservationMaxClaimTimeInMinutes <Int32>]
  [-ProcessExternalMeetingMessages <Boolean>]
- [-RemoveCanceledMeetings <Boolean>
+ [-RemoveCanceledMeetings <Boolean>]
  [-RemoveForwardedMeetingNotifications <Boolean>]
  [-RemoveOldMeetingMessages <Boolean>]
  [-RemovePrivateProperty <Boolean>]
@@ -115,7 +117,9 @@ This example allows a list of users to submit in-policy meeting requests to the 
 ### Example 7
 ```powershell
 $group = New-DistributionGroup "Room 221 Booking Allowed"
+
 Update-DistributionGroupMember -Identity $group.Identity -Members karina@contoso.com,tony@contoso.com -BypassSecurityGroupManagerCheck:$true
+
 Set-CalendarProcessing -Identity "Room 221" -AutomateProcessing AutoAccept -BookInPolicy $group.Identity -AllBookInPolicy $false
 ```
 
@@ -257,7 +261,11 @@ Accept wildcard characters: False
 The AllowConflicts parameter specifies whether to allow conflicting meeting requests. Valid values are:
 
 - $true: Conflicts are allowed. A recurring meeting series is accepted regardless of whether any occurrences conflict with existing bookings. The values of the ConflictPercentageAllowed or MaximumConflictInstances parameters are ignored.
-- $false: Conflicts aren't allowed. This is the default value. Whether an entire series is declined depends on the amount of conflicts in the series: <br> • The series is declined if the number or percentage of conflicts is higher than the ConflictPercentageAllowed or MaximumConflictInstances parameter values. <br> • The series is accepted, but conflicting occurrences are declined if the number or percentage of conflicts is lower than the ConflictPercentageAllowed or MaximumConflictInstances parameter values. If the EnableResponseDetails parameter value is $true, the organizer will receive a notification email for each declined occurrence.
+- $false: Conflicts aren't allowed. This is the default value. Whether an entire series is declined depends on the amount of conflicts in the series:
+
+  • The series is declined if the number or percentage of conflicts is higher than the ConflictPercentageAllowed or MaximumConflictInstances parameter values.
+
+  • The series is accepted, but conflicting occurrences are declined if the number or percentage of conflicts is lower than the ConflictPercentageAllowed or MaximumConflictInstances parameter values. If the EnableResponseDetails parameter value is $true, the organizer will receive a notification email for each declined occurrence.
 
 ```yaml
 Type: Boolean
@@ -554,6 +562,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -EnableAutoRelease
+This parameter is available only in the cloud-based service.
+
+{{ Fill EnableAutoRelease Description }}
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+Applicable: Exchange Online
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -EnableResponseDetails
 The EnableResponseDetails parameter specifies whether to include the reasons for accepting or declining a meeting in the response email message. Valid values are:
 
@@ -576,7 +602,7 @@ Accept wildcard characters: False
 ### -EnforceCapacity
 This parameter is available only in the cloud-based service.
 
-The EnforceCapacity parameter specifies whether to restrict the number of attendees to the capacity of the workspace.  For example, if capacity is set to 10, then only 10 people can book the workspace. Valid values are:
+The EnforceCapacity parameter specifies whether to restrict the number of attendees to the capacity of the workspace. For example, if capacity is set to 10, then only 10 people can book the workspace. Valid values are:
 
 - $true: Capacity is enforced.
 - $false: Capacity is not enforced. This is the default value.
@@ -722,6 +748,24 @@ Type: Boolean
 Parameter Sets: (All)
 Aliases:
 Applicable: Exchange Server 2010, Exchange Server 2013, Exchange Server 2016, Exchange Server 2019, Exchange Online
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PostReservationMaxClaimTimeInMinutes
+This parameter is available only in the cloud-based service.
+
+{{ Fill PostReservationMaxClaimTimeInMinutes Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+Applicable: Exchange Online
 
 Required: False
 Position: Named

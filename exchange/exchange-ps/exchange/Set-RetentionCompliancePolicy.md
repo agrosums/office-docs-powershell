@@ -24,9 +24,10 @@ For information about the parameter sets in the Syntax section below, see [Excha
 
 ### RetryDistribution
 ```
-Set-RetentionCompliancePolicy [-Identity] <PolicyIdParameter>
- [-RetryDistribution]
+Set-RetentionCompliancePolicy [-Identity] <PolicyIdParameter> [-RetryDistribution]
  [-Confirm]
+ [-EnforceSimulationPolicy <Boolean>]
+ [-StartSimulation <Boolean>]
  [-WhatIf]
  [<CommonParameters>]
 ```
@@ -49,8 +50,10 @@ Set-RetentionCompliancePolicy [-Identity] <PolicyIdParameter>
  [-Comment <String>]
  [-Confirm]
  [-Enabled <Boolean>]
+ [-EnforceSimulationPolicy <Boolean>]
  [-Force]
  [-PolicyTemplateInfo <PswsHashtable>]
+ [-PolicyRBACScopes <MultiValuedProperty>]
  [-RemoveExchangeLocation <MultiValuedProperty>]
  [-RemoveExchangeLocationException <MultiValuedProperty>]
  [-RemoveModernGroupLocation <MultiValuedProperty>]
@@ -63,20 +66,22 @@ Set-RetentionCompliancePolicy [-Identity] <PolicyIdParameter>
  [-RemoveSkypeLocation <MultiValuedProperty>]
  [-RemoveSkypeLocationException <MultiValuedProperty>]
  [-RestrictiveRetention <Boolean>]
+ [-StartSimulation <Boolean>]
  [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### AdaptiveScopeLocation
 ```
-Set-RetentionCompliancePolicy [-Identity] <PolicyIdParameter>
- [-AddAdaptiveScopeLocation <MultiValuedProperty>]
+Set-RetentionCompliancePolicy [-Identity] <PolicyIdParameter> [-AddAdaptiveScopeLocation <MultiValuedProperty>]
  [-Applications <MultiValuedProperty>]
  [-Comment <String>]
  [-Confirm]
  [-Enabled <Boolean>]
+ [-EnforceSimulationPolicy <Boolean>]
  [-Force]
  [-RemoveAdaptiveScopeLocation <MultiValuedProperty>]
+ [-StartSimulation <Boolean>]
  [-WhatIf]
  [<CommonParameters>]
 ```
@@ -91,11 +96,13 @@ Set-RetentionCompliancePolicy [-Identity] <PolicyIdParameter>
  [-Comment <String>]
  [-Confirm]
  [-Enabled <Boolean>]
+ [-EnforceSimulationPolicy <Boolean>]
  [-Force]
  [-RemoveTeamsChannelLocation <MultiValuedProperty>]
  [-RemoveTeamsChannelLocationException <MultiValuedProperty>]
  [-RemoveTeamsChatLocation <MultiValuedProperty>]
  [-RemoveTeamsChatLocationException <MultiValuedProperty>]
+ [-StartSimulation <Boolean>]
  [-WhatIf]
  [<CommonParameters>]
 ```
@@ -517,7 +524,7 @@ The Applications parameter specifies the target when Microsoft 365 Groups are in
 - `Group:Exchange` for the mailbox that's connected to the Microsoft 365 Group.
 - `Group:SharePoint` for the SharePoint site that's connected to the Microsoft 365 Group.
 - `"Group:Exchange,SharePoint"` for both the mailbox and the SharePoint site that are connected to the Microsoft 365 Group.
-- blank (`$null`): This is the default value, and is functionally equivalent to the value `"Group:Exchange,SharePoint"`.  To return to the default value of both the mailbox and SharePoint site for the selected Microsoft 365 groups, specify `"Group:Exchange,SharePoint"`.
+- blank (`$null`): This is the default value, and is functionally equivalent to the value `"Group:Exchange,SharePoint"`. To return to the default value of both the mailbox and SharePoint site for the selected Microsoft 365 groups, specify `"Group:Exchange,SharePoint"`.
 
 ```yaml
 Type: MultiValuedProperty
@@ -586,6 +593,27 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -EnforceSimulationPolicy
+The EnforceSimulationPolicy parameter specifies whether to enforce a simulation policy as an active policy. Valid values are:
+
+- $true: Enforce the simulation policy as an active policy.
+- $false: Don't enforce the simulation policy as an active policy. This is the default value.
+
+For more information about simulation mode, see [Learn about simulation mode](https://learn.microsoft.com/microsoft-365/compliance/apply-retention-labels-automatically#learn-about-simulation-mode).
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+Applicable: Security & Compliance
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Force
 The Force switch hides warning or confirmation messages. You don't need to specify a value with this switch.
 
@@ -594,6 +622,22 @@ You can use this switch to run tasks programmatically where prompting for admini
 ```yaml
 Type: SwitchParameter
 Parameter Sets: Identity, TeamLocation
+Aliases:
+Applicable: Security & Compliance
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PolicyRBACScopes
+{{ Fill PolicyRBACScopes Description }}
+
+```yaml
+Type: MultiValuedProperty
+Parameter Sets: Identity
 Aliases:
 Applicable: Security & Compliance
 
@@ -983,6 +1027,27 @@ You can enter multiple values separated by commas. If the values contain spaces 
 ```yaml
 Type: MultiValuedProperty
 Parameter Sets: TeamLocation
+Aliases:
+Applicable: Security & Compliance
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -StartSimulation
+The StartSimulation parameter specifies whether to start the simulation for a policy that was created in simulation mode. Valid values are:
+
+- $true: Start the simulation.
+- $false: Don't start the simulation. This is the default value.
+
+For more information about simulation mode, see [Learn about simulation mode](https://learn.microsoft.com/microsoft-365/compliance/apply-retention-labels-automatically#learn-about-simulation-mode).
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
 Aliases:
 Applicable: Security & Compliance
 

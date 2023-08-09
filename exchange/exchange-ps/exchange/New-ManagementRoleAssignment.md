@@ -126,6 +126,7 @@ This example assigns the Mail Recipients role to the Tier 2 Help Desk role group
 ### Example 2
 ```powershell
 Get-ManagementRole "MyVoiceMail" | Format-Table Name, IsEndUserRole
+
 New-ManagementRoleAssignment -Role "MyVoiceMail" -Policy "Sales end-users"
 ```
 
@@ -189,7 +190,7 @@ Accept wildcard characters: False
 ### -App
 This parameter is available only in the cloud-based service.
 
-The App parameter specifies the service principal to assign the management role to. Specifically, the ServiceId GUID value from the output of the Get-ServicePrincipal cmdlet (for example, 6233fba6-0198-4277-892f-9275bf728bcc).
+The App parameter specifies the service principal to assign the management role to. Specifically, the ObjectId GUID value from the output of the Get-ServicePrincipal cmdlet (for example, 6233fba6-0198-4277-892f-9275bf728bcc).
 
 For more information about service principals, see [Application and service principal objects in Azure Active Directory](https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals).
 
@@ -476,6 +477,8 @@ Accept wildcard characters: False
 ```
 
 ### -RecipientAdministrativeUnitScope
+This parameter is functional only in the cloud-based service.
+
 The RecipientAdministrativeUnitScope parameter specifies the administrative unit to scope the new role assignment to.
 
 Administrative units are Azure Active Directory containers of resources. You can view the available administrative units by using the Get-AdministrativeUnit cmdlet.

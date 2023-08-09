@@ -56,6 +56,8 @@ Search-MailboxAuditLog [-Mailboxes <MultiValuedProperty>]
 ## DESCRIPTION
 The Search-MailboxAuditLog cmdlet performs a synchronous search of mailbox audit logs for one or more specified mailboxes and displays search results in the Exchange Management Shell window. To search mailbox audit logs for multiple mailboxes and have the results sent by email to specified recipients, use the New-MailboxAuditLogSearch cmdlet instead. To learn more about mailbox audit logging, see [Mailbox audit logging in Exchange Server](https://learn.microsoft.com/Exchange/policy-and-compliance/mailbox-audit-logging/mailbox-audit-logging).
 
+In multi-geo environments, when you run this cmdlet in a different region from the mailbox that you're trying to search, you might receive the error, "An error occurred while trying to access the audit log." In this scenario, you need to anchor the PowerShell session to a user in the same region as the mailbox as described in [Connect directly to a geo location using Exchange Online PowerShell](https://learn.microsoft.com/microsoft-365/enterprise/administering-exchange-online-multi-geo#connect-directly-to-a-geo-location-using-exchange-online-powershell).
+
 You need to be assigned permissions before you can run this cmdlet. Although this topic lists all parameters for the cmdlet, you may not have access to some parameters if they're not included in the permissions assigned to you. To find the permissions required to run any cmdlet or parameter in your organization, see [Find the permissions required to run any Exchange cmdlet](https://learn.microsoft.com/powershell/exchange/find-exchange-cmdlet-permissions).
 
 ## EXAMPLES
@@ -76,10 +78,10 @@ This example retrieves mailbox audit log entries for Ken Kwok and Ben Smith's ma
 
 ### Example 3
 ```powershell
-Search-MailboxAuditLog -Identity kwok -LogonTypes Owner -ShowDetails -StartDate 1/1/2016 -EndDate 3/1/2016 | Where-Object {$_.Operation -eq "HardDelete"}
+Search-MailboxAuditLog -Identity kwok -LogonTypes Owner -ShowDetails -StartDate 1/1/2017 -EndDate 3/1/2017 | Where-Object {$_.Operation -eq "HardDelete"}
 ```
 
-This example retrieves mailbox audit log entries for Ken Kwok's mailbox for actions performed by the mailbox owner between 1/1/2016 and 3/1/2016. The results are piped to the Where-Object cmdlet and filtered to return only entries with the HardDelete action.
+This example retrieves mailbox audit log entries for Ken Kwok's mailbox for actions performed by the mailbox owner between 1/1/2017 and 3/1/2017. The results are piped to the Where-Object cmdlet and filtered to return only entries with the HardDelete action.
 
 ## PARAMETERS
 
@@ -206,9 +208,7 @@ Accept wildcard characters: False
 ### -IncludeInactiveMailbox
 This parameter is available only in the cloud-based service.
 
-The IncludeInactiveMailbox switch is required to include inactive mailboxes in the search. You don't need to specify a value with this switch.
-
-An inactive mailbox is a mailbox that's placed on Litigation Hold or In-Place Hold before it's soft-deleted. The contents of an inactive mailbox are preserved until the hold is removed.
+{{ Fill IncludeInactiveMailbox Description }}
 
 ```yaml
 Type: SwitchParameter

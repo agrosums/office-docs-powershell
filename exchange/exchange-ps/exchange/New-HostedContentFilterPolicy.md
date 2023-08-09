@@ -51,6 +51,7 @@ New-HostedContentFilterPolicy [-Name] <String>
  [-IncreaseScoreWithNumericIps <SpamFilteringOption>]
  [-IncreaseScoreWithRedirectToOtherPort <SpamFilteringOption>]
  [-InlineSafetyTipsEnabled <Boolean>]
+ [-IntraOrgFilterState <IntraOrgFilterState>]
  [-LanguageBlockList <MultiValuedProperty>]
  [-MarkAsSpamBulkMail <SpamFilteringOption>]
  [-MarkAsSpamEmbedTagsInHtml <SpamFilteringOption>]
@@ -67,7 +68,7 @@ New-HostedContentFilterPolicy [-Name] <String>
  [-ModifySubjectValue <String>]
  [-PhishQuarantineTag <String>]
  [-PhishSpamAction <SpamFilteringAction>]
- [-PhishZapEnabled <Boolean>
+ [-PhishZapEnabled <Boolean>]
  [-QuarantineRetentionPeriod <Int32>]
  [-RecommendedPolicyType <RecommendedPolicyType>]
  [-RedirectToRecipients <MultiValuedProperty>]
@@ -525,7 +526,6 @@ Accept wildcard characters: False
 ### -HighConfidencePhishAction
 The HighConfidencePhishAction parameter specifies the action to take on messages that are marked as high confidence phishing (not phishing). Phishing messages use fraudulent links or spoofed domains to get personal information. Valid values are:
 
-- MoveToJmf: Deliver the message to the recipient's mailbox, and move the message to the Junk Email folder.
 - Redirect: Redirect the message to the recipients specified by the RedirectToRecipients parameter.
 - Quarantine: Move the message to quarantine. By default, messages that are quarantined as high confidence phishing are available only to admins. Or, you can use the HighConfidencePhishQuarantineTag parameter to specify what end-users are allowed to do on quarantined messages.
 
@@ -681,7 +681,7 @@ Accept wildcard characters: False
 The IncreaseScoreWithRedirectToOtherPort parameter increases the spam score of messages that contain links that redirect to TCP ports other than 80 (HTTP), 8080 (alternate HTTP), or 443 (HTTPS). Valid values are:
 
 - Off: The setting is disabled. This is the default value, and we recommend that you don't change it.
-- On: The setting is enabled. Messages that contain links that redirect to other TCP ports are given  a higher spam score and therefore have a higher chance of getting marked as spam with SCL 5 or 6, and the X-header `X-CustomSpam: URL redirect to other port` is added to the message. Note that not all messages which matches the setting will be marked as spam.
+- On: The setting is enabled. Messages that contain links that redirect to other TCP ports are given a higher spam score and therefore have a higher chance of getting marked as spam with SCL 5 or 6, and the X-header `X-CustomSpam: URL redirect to other port` is added to the message. Note that not all messages which matches the setting will be marked as spam.
 - Test: The action specified by the TestModeAction parameter is taken on the message.
 
 ```yaml
@@ -716,18 +716,37 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -IntraOrgFilterState
+The IntraOrgFilterState parameter specifies whether to enable anti-spam filtering for messages sent between internal users (users in the same organization). The action that's configured in the policy for the specified spam filter verdicts is taken on messages sent between internal users. Valid values are:
+
+- Default: This is the default value. Currently, this value is the same as Disabled. The behavior for the value Default will eventually change to apply the action for high confidence phishing detections in the policy as if you selected HighConfidencePhish. Check the Message Center for announcements to changes in this setting.
+- HighConfidencePhish 
+- Phish: Includes phishing and high confidence phishing.
+- HighConfidenceSpam: Includes high confidence spam, phishing, and high confidence phishing.
+- Spam: Includes spam, high confidence spam, phishing, and high confidence phishing.
+- Disabled
+
+```yaml
+Type: IntraOrgFilterState
+Parameter Sets: (All)
+Aliases:
+Applicable: Exchange Online, Exchange Online Protection
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -LanguageBlockList
-The LanguageBlockList parameter specifies the email content languages that are marked as spam when the EnableLanguageBlockList parameter value is $true. A valid value is a supported ISO 639-1 two-letter language code:
+The LanguageBlockList parameter specifies the email content languages that are marked as spam when the EnableLanguageBlockList parameter value is $true. A valid value is a supported uppercase ISO 639-1 two-letter language code:
 
-af, ar, az, be, bg, bn, br, bs, ca, cs, cy, da, de, el, en, eo, es, et, eu, fa, fi, fo, fr, fy, ga, gl, gu, ha, he, hi, hr, hu, hy, id, is, it, ja, ka, kk, kl, kn, ko, ku, ky, la, lb, lt, lv, mi, mk, ml, mn, mr, ms, mt, nb, nl, nn, pa, pl, ps, pt, rm, ro, ru, se, sk, sl, sq, sr, sv, sw, ta, te, th, tl, tr, uk, ur, uz, vi, wen, yi, zh-cn, zh-tw, and zu.
+AF, AR, AZ, BE, BG, BN, BR, BS, CA, CS, CY, DA, DE, EL, EN, EO, ES, ET, EU, FA, FI, FO, FR, FY, GA, GL, GU, HA, HE, HI, HR, HU, HY, ID, IS, IT, JA, KA, KK, KL, KN, KO, KU, KY, LA, LB, LT, LV, MI, MK, ML, MN, MR, MS, MT, NB, NL, NN, PA, PL, PS, PT, RM, RO, RU, SE, SK, SL, SQ, SR, SV, SW, TA, TE, TH, TL, TR, UK, UR, UZ, VI, WEN, YI, ZH-CN, ZH-TW, and ZU.
 
-A reference for two-letter language codes is available at [ISO 639-2](https://www.loc.gov/standards/iso639-2/php/code_list.php). Note that not all possible language codes are available as input for this parameter.
+A reference for two-letter language codes is available at [ISO 639-2](https://www.loc.gov/standards/iso639-2/php/code_list.php). Not all possible language codes are available as input for this parameter.
 
-To enter multiple values and overwrite any existing entries, use the following syntax: `Value1,Value2,...ValueN`.
-
-To add or remove one or more values without affecting any existing entries, use the following syntax: `@{Add="Value1","Value2"...; Remove="Value3","Value4"...}`.
-
-To empty the list, use the value $null.
+You can specify multiple values separated by commas.
 
 ```yaml
 Type: MultiValuedProperty

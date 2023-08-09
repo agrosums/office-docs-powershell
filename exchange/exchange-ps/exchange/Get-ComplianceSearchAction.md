@@ -103,7 +103,7 @@ When you use the Identity parameter, more details are returned in the results. F
 
 - In the Results line, the values of the Item count, Total size, and Details properties are populated.
 - Location lines are added to the results.
-- The NumBinding property value is populated.
+- The NumBindings property value is populated. This property includes the primary mailbox, the main archive, and any additional archives for users included in the search. NumBindings is not the number of users included in the search, because each included user could have or not have a combination of a primary mailbox, a main archive, and additional archives.
 - The affected location properties (for example, ExchangeLocation) are populated.
 - The CaseName property value is populated.
 
@@ -225,7 +225,7 @@ Accept wildcard characters: False
 ```
 
 ### -Purge
-**Note**: In Security & Compliance PowerShell, this parameter is available only in the Search and Purge role. By default, this role is assigned only to the Organization Management role group.
+**Note**: In Security & Compliance PowerShell, this parameter is available only in the Search and Purge role. By default, this role is assigned only to the Organization Management and Data Investigator role groups.
 
 The Purge switch filters the results by Purge compliance search actions. You don't need to specify a value with this switch.
 

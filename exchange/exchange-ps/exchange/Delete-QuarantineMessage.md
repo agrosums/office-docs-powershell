@@ -25,6 +25,8 @@ For information about the parameter sets in the Syntax section below, see [Excha
 Delete-QuarantineMessage -Identities <QuarantineMessageIdentity[]>
  [-Identity <QuarantineMessageIdentity>]
  [-Confirm]
+ [-EntityType <Microsoft.Exchange.Management.FfoQuarantine.EntityType>]
+ [-HardDelete]
  [-RecipientAddress <String[]>]
  [-WhatIf]
  [<CommonParameters>]
@@ -34,6 +36,8 @@ Delete-QuarantineMessage -Identities <QuarantineMessageIdentity[]>
 ```
 Delete-QuarantineMessage -Identity <QuarantineMessageIdentity>
  [-Confirm]
+ [-EntityType <Microsoft.Exchange.Management.FfoQuarantine.EntityType>]
+ [-HardDelete]
  [-RecipientAddress <String[]>]
  [-WhatIf]
  [<CommonParameters>]
@@ -54,6 +58,7 @@ This example deletes the quarantined message with the specified Identity value.
 ### Example 2
 ```powershell
 $ids = Get-QuarantineMessage | select -ExpandProperty Identity
+
 Delete-QuarantineMessage -Identity $ids[4]
 ```
 
@@ -62,6 +67,7 @@ This example deletes the 5th quarantined message in the list of results from Get
 ### Example 3
 ```powershell
 $ids = Get-QuarantineMessage | select -ExpandProperty Identity
+
 Delete-QuarantineMessage -Identities $ids -Identity 000
 ```
 
@@ -130,6 +136,44 @@ The Confirm switch specifies whether to show or hide the confirmation prompt. Ho
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: cf
+Applicable: Exchange Online, Security & Compliance, Exchange Online Protection
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -EntityType
+The EntityType parameter filters the results by EntityType. Valid values are:
+
+- Email
+- SharePointOnline
+- Teams (currently in Preview)
+
+```yaml
+Type: Microsoft.Exchange.Management.FfoQuarantine.EntityType
+Parameter Sets: (All)
+Aliases:
+Applicable: Exchange Online, Security & Compliance, Exchange Online Protection
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HardDelete
+The HardDelete switch specifies the message is permanently deleted and isn't recoverable. You don't need to specify a value with this switch.
+
+If you don't use this switch, the message is deleted, but is potentially recoverable.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
 Applicable: Exchange Online, Security & Compliance, Exchange Online Protection
 
 Required: False

@@ -46,6 +46,7 @@ Get-MailboxStatistics [-Identity] <GeneralMailboxOrMailUserIdParameter>
  [-IncludeQuarantineDetails]
  [-IncludeSoftDeletedRecipients]
  [-NoADLookup]
+ [-UseCustomRouting]
  [<CommonParameters>]
 ```
 
@@ -127,6 +128,7 @@ This example returns the summary move history for the completed move request for
 ### Example 8
 ```powershell
 $temp=Get-MailboxStatistics -Identity AylaKol -IncludeMoveHistory
+
 $temp.MoveHistory[0]
 ```
 
@@ -135,6 +137,7 @@ This example returns the detailed move history for the completed move request fo
 ### Example 9
 ```powershell
 $temp=Get-MailboxStatistics -Identity AylaKol -IncludeMoveReport
+
 $temp.MoveHistory[0] | Export-CSV C:\MoveReport_AylaKol.csv
 ```
 
@@ -440,6 +443,24 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True
+Accept wildcard characters: False
+```
+
+### -UseCustomRouting
+This parameter is available only in the cloud-based service.
+
+{{ Fill UseCustomRouting Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: Identity
+Aliases:
+Applicable: Exchange Online
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

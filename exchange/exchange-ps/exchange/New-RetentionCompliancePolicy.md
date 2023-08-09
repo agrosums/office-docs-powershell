@@ -30,10 +30,12 @@ New-RetentionCompliancePolicy [-Name] <String>
  [-ExchangeLocation <MultiValuedProperty>]
  [-ExchangeLocationException <MultiValuedProperty>]
  [-Force]
+ [-IsSimulation]
  [-ModernGroupLocation <MultiValuedProperty>]
  [-ModernGroupLocationException <MultiValuedProperty>]
  [-OneDriveLocation <MultiValuedProperty>]
  [-OneDriveLocationException <MultiValuedProperty>]
+ [-PolicyRBACScopes <MultiValuedProperty>]
  [-PolicyTemplateInfo <PswsHashtable>]
  [-PublicFolderLocation <MultiValuedProperty>]
  [-RestrictiveRetention <Boolean>]
@@ -53,6 +55,7 @@ New-RetentionCompliancePolicy [-Name] <String>
  [-Confirm]
  [-Enabled <Boolean>]
  [-Force]
+ [-IsSimulation]
  [-RestrictiveRetention <Boolean>]
  [-RetainCloudAttachment <Boolean>]
  [-TeamsChannelLocation <MultiValuedProperty>]
@@ -66,10 +69,12 @@ New-RetentionCompliancePolicy [-Name] <String>
 ### AdaptiveScopeLocation
 ```
 New-RetentionCompliancePolicy [-Name] <String> -AdaptiveScopeLocation <MultiValuedProperty>
+ [-Applications <MultiValuedProperty>]
  [-Comment <String>]
  [-Confirm]
  [-Enabled <Boolean>]
  [-Force]
+ [-IsSimulation]
  [-RestrictiveRetention <Boolean>]
  [-RetainCloudAttachment <Boolean>]
  [-WhatIf]
@@ -100,7 +105,6 @@ New-RetentionCompliancePolicy -Name "Marketing Department" -Enabled $true -Share
 This example creates a new auto-apply label policy targeted to cloud attachments named Marketing Department with the specified details.
 
 The next step is to use the New-RetentionComplianceRule cmdlet to add a retention label to the retention label policy.
-
 
 ## PARAMETERS
 
@@ -150,7 +154,7 @@ The Applications parameter specifies the target when Microsoft 365 Groups are in
 
 ```yaml
 Type: MultiValuedProperty
-Parameter Sets: Default
+Parameter Sets: Default, AdaptiveScopeLocation
 Aliases:
 Applicable: Security & Compliance
 
@@ -292,6 +296,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -IsSimulation
+The IsSimulation switch specifies the policy is created in simulation mode. You don't need to specify a value with this switch.
+
+For more information about simulation mode, see [Learn about simulation mode](https://learn.microsoft.com/microsoft-365/compliance/apply-retention-labels-automatically#learn-about-simulation-mode).
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+Applicable: Security & Compliance
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ModernGroupLocation
 The ModernGroupLocation parameter specifies the Microsoft 365 Groups to include in the policy. Valid values are:
 
@@ -367,6 +389,22 @@ Accept wildcard characters: False
 This parameter specifies the OneDrive for Business sites to exclude when you use the value All for the OneDriveLocation parameter. You identify the site by its URL value.
 
 You can enter multiple values separated by commas. If the values contain spaces or otherwise require quotation marks, use the following syntax: `"Value1","Value2",..."ValueN"`.
+
+```yaml
+Type: MultiValuedProperty
+Parameter Sets: Default
+Aliases:
+Applicable: Security & Compliance
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PolicyRBACScopes
+{{ Fill PolicyRBACScopes Description }}
 
 ```yaml
 Type: MultiValuedProperty

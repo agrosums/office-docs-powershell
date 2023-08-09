@@ -6919,6 +6919,11 @@
       "source_path": "exchange/virtual-folder/exchange/Update-EOPDistributionGroupMember.md",
       "redirect_url": "/powershell/module/exchange/update-distributiongroupmember",
       "redirect_document_id": false
+    },
+    {
+      "source_path": "teams/teams-ps/teams/New-CsTeamsShiftsConnectionTeamMap.yml",
+      "redirect_url": "https://review.learn.microsoft.com/en-us/powershell/module/teams/",
+      "redirect_document_id": false
     }
   ]
 }

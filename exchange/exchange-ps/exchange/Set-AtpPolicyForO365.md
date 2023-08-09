@@ -27,7 +27,6 @@ For information about the parameter sets in the Syntax section below, see [Excha
 ```
 Set-AtpPolicyForO365 [[-Identity] <AtpPolicyForO365IdParameter>]
  [-AllowSafeDocsOpen <Boolean>]
- [-BlockUrls <MultiValuedProperty>]
  [-Confirm]
  [-EnableATPForSPOTeamsODB <Boolean>]
  [-EnableSafeDocs <Boolean>]
@@ -81,30 +80,6 @@ This parameter is meaningful only when the EnableSafeDocs parameter value is $tr
 
 ```yaml
 Type: Boolean
-Parameter Sets: (All)
-Aliases:
-Applicable: Exchange Online
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BlockUrls
-**Note**: The functionality of this parameter is being replaced by the \*-TenantAllowBlockListItems cmdlets. This parameter now only supports the removal of blocked URLs. Use the \*-TenantAllowBlockListItems cmdlets to add and remove blocked URLs.
-
-The BlockUrls parameter specifies the URLs that are always blocked by Safe Links in email messages and Safe Links for Office 365 apps.
-
-To enter multiple values and overwrite any existing entries, use the following syntax: `Value1,Value2,...ValueN`. If the values contain spaces or otherwise require quotation marks, use the following syntax: `"Value1","Value2",..."ValueN"`.
-
-To add or remove one or more values without affecting any existing entries, use the following syntax: `@{Add="Value1","Value2"...; Remove="Value3","Value4"...}`.
-
-For details about the entry syntax, see [Entry syntax for the "Block the following URLs" list](https://learn.microsoft.com/microsoft-365/security/office-365-security/safe-links-about#entry-syntax-for-the-block-the-following-urls-list).
-
-```yaml
-Type: MultiValuedProperty
 Parameter Sets: (All)
 Aliases:
 Applicable: Exchange Online

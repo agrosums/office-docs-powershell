@@ -34,6 +34,7 @@ Get-UserPhoto [-Anr <String>]
  [-ReadFromDomainController]
  [-ResultSize <Unlimited>]
  [-SortBy <String>]
+ [-UseCustomRouting]
  [<CommonParameters>]
 ```
 
@@ -51,13 +52,14 @@ Get-UserPhoto [[-Identity] <MailboxIdParameter>]
  [-ReadFromDomainController]
  [-ResultSize <Unlimited>]
  [-SortBy <String>]
+ [-UseCustomRouting]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 The user photos feature allows users to associate a picture with their account. User photos are stored in the user's Active Directory account and in the root directory of the user's Exchange mailbox. The user photo feature must be set for a user before you can run the Get-UserPhoto cmdlet to view information about the user's photo. Otherwise, you get an error message saying the user photo doesn't exist for the specified users. Administrators use the Set-UserPhoto cmdlet or the Exchange admin center (EAC) to configure user photos. Users can upload, preview, and save a user photo to their account by using the Outlook on the web Options page.
 
-**Note**: In Microsoft Graph, the [Get-MgUserPhoto](https://learn.microsoft.com/powershell/module/microsoft.graph.users/get-mguserphoto) and [Get-MgUserPhotoContent](https://learn.microsoft.com/powershell/module/microsoft.graph.users/get-mguserphotocontent) cmdlets are also available.
+**Note**: In Microsoft Graph PowerShell, the [Get-MgUserPhoto](https://learn.microsoft.com/powershell/module/microsoft.graph.users/get-mguserphoto) and [Get-MgUserPhotoContent](https://learn.microsoft.com/powershell/module/microsoft.graph.users/get-mguserphotocontent) cmdlets are also available.
 
 You need to be assigned permissions before you can run this cmdlet. Although this topic lists all parameters for the cmdlet, you may not have access to some parameters if they're not included in the permissions assigned to you. To find the permissions required to run any cmdlet or parameter in your organization, see [Find the permissions required to run any Exchange cmdlet](https://learn.microsoft.com/powershell/exchange/find-exchange-cmdlet-permissions).
 
@@ -329,6 +331,24 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 Applicable: Exchange Server 2013, Exchange Server 2016, Exchange Server 2019, Exchange Online
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UseCustomRouting
+This parameter is available only in the cloud-based service.
+
+{{ Fill UseCustomRouting Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+Applicable: Exchange Online
 
 Required: False
 Position: Named

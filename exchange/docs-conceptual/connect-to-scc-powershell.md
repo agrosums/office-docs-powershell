@@ -2,7 +2,7 @@
 title: Connect to Security & Compliance PowerShell
 author: chrisda
 manager: dansimp
-ms.date:
+ms.date: 7/14/2023
 ms.audience: Admin
 audience: Admin
 ms.topic: article
@@ -27,14 +27,16 @@ The Exchange Online PowerShell module uses modern authentication for connecting 
 
 To connect to Security & Compliance PowerShell for automation, see [App-only authentication for unattended scripts](app-only-auth-powershell-v2.md).
 
-To use the older Exchange Online Remote PowerShell Module (the V1 module) to connect to Security & Compliance PowerShell using MFA, see [V1 module - Connect to Security & Compliance PowerShell using MFA](v1-module-mfa-connect-to-scc-powershell.md). Note that this older version of the module will eventually be retired.
+To use the older Exchange Online Remote PowerShell Module (the V1 module) to connect to Security & Compliance PowerShell using MFA, see [V1 module - Connect to Security & Compliance PowerShell using MFA](v1-module-mfa-connect-to-scc-powershell.md). This older version of the module will eventually be retired.
 
 ## What do you need to know before you begin?
 
 - The requirements for installing and using the module are described in [Install and maintain the Exchange Online PowerShell module](exchange-online-powershell-v2.md#install-and-maintain-the-exchange-online-powershell-module).
 
   > [!NOTE]
-  > Security & Compliance PowerShell still requires Basic authentication in WinRM as described [Prerequisites for the Exchange Online PowerShell module](exchange-online-powershell-v2.md#turn-on-basic-authentication-in-winrm). REST API cmdlets that allow you to turn off Basic authentication in WinRM are not yet available for the **Connect-IPPSSession** cmdlet. For more information, see [Updates for the EXO V3 module)](exchange-online-powershell-v2.md#updates-for-the-exo-v3-module).
+  > If you're using version 3.2.0 or later of the module, and you don't use the _UseRPSSession_ switch in the **Connect-IPPSSession** command, you have access to REST API cmdlets _only_. For more information, see [Updates for the EXO V3 module)](exchange-online-powershell-v2.md#updates-for-the-exo-v3-module).
+  >
+  > Remote PowerShell connections will be deprecated in Security & Compliance PowerShell. For more information, see [Deprecation of Remote PowerShell (RPS) Protocol in Security and Compliance PowerShell](https://techcommunity.microsoft.com/t5/exchange-team-blog/deprecation-of-remote-powershell-rps-protocol-in-security-and/ba-p/3815432).
 
 - After you connect, the cmdlets and parameters that you have or don't have access to is controlled by role-based access control (RBAC). For more information, see [Permissions in the Microsoft 365 Defender portal](/microsoft-365/security/office-365-security/mdo-portal-permissions) and [Permissions in the Microsoft Purview compliance portal](/microsoft-365/compliance/microsoft-365-compliance-center-permissions).
 
@@ -57,12 +59,14 @@ Import-Module ExchangeOnlineManagement
 The command that you need to run uses the following syntax:
 
 ```powershell
-Connect-IPPSSession -UserPrincipalName <UPN> [-ConnectionUri <URL>] [-AzureADAuthorizationEndpointUri <URL>] [-DelegatedOrganization <String>] [-PSSessionOption $ProxyOptions]
+Connect-IPPSSession -UserPrincipalName <UPN> [-ConnectionUri <URL>] [-UseRPSSession] [-AzureADAuthorizationEndpointUri <URL>] [-DelegatedOrganization <String>] [-PSSessionOption $ProxyOptions]
 ```
 
 For detailed syntax and parameter information, see [Connect-IPPSSession](/powershell/module/exchange/connect-ippssession).
 
 - _\<UPN\>_ is your account in user principal name format (for example, `navin@contoso.onmicrosoft.com`).
+
+- In v3.2.0 or later of the module, if you don't use the _UseRPSSession_ switch in the **Connect-IPPSSession** command, you connect in REST API mode. To connect in remote PowerShell mode, use the _UseRPSSession_ switch. For more information, see [Updates for the EXO V3 module)](exchange-online-powershell-v2.md#updates-for-the-exo-v3-module).
 
 - The required _ConnectionUri_ and _AzureADAuthorizationEndpointUri_ values depend on the nature of your Microsoft 365 organization. Common values are described in the following table:
 
@@ -151,7 +155,7 @@ This example connects to customer organizations in the following scenarios:
 
 ## Step 3: Disconnect when you're finished
 
-Be sure to disconnect the session when you're finished. If you close the PowerShell window without disconnecting the session, you could use up all the sessions available to you, and you'll need to wait for the sessions to expire. To disconnect the session, run the following command.
+Be sure to disconnect the session when you're finished. If you close the PowerShell window without disconnecting the session, you could use up all the sessions available to you, and you need to wait for the sessions to expire. To disconnect the session, run the following command:
 
 ```powershell
 Disconnect-ExchangeOnline
@@ -174,11 +178,17 @@ If you receive errors, check the following requirements:
 
 - A common problem is an incorrect password. Run the three steps again and pay close attention to the username and password that you use.
 
-- To help prevent denial-of-service (DoS) attacks, you're limited to five open remote PowerShell connections to Security & Compliance PowerShell.
+- To help prevent denial-of-service (DoS) attacks, when you connect using remote PowerShell mode, you're limited to five open connections to Security & Compliance PowerShell.
 
-- The account that you use to connect must be enabled for remote PowerShell. For more information, see [Enable or disable access to Exchange Online PowerShell](disable-access-to-exchange-online-powershell.md).
+- The account that you use to connect must be enabled for PowerShell. For more information, see [Enable or disable access to Exchange Online PowerShell](disable-access-to-exchange-online-powershell.md).
 
 - TCP port 80 traffic needs to be open between your local computer and Microsoft 365. It's probably open, but it's something to consider if your organization has a restrictive internet access policy.
+
+- REST-based connections to Security & Compliance PowerShell require the PowerShellGet module, and by dependency, the PackageManagement module, so you'll receive errors if you try to connect without having them installed. For example, you might see the following error:
+
+  > The term 'Update-ModuleManifest' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+  For more information about the PowerShellGet and PackageManagement module requirements, see [PowerShellGet for REST-based connections in Windows](exchange-online-powershell-v2.md#powershellget-for-rest-based-connections-in-windows).
 
 - You might fail to connect if your client IP address changes during the connection request. This can happen if your organization uses a source network address translation (SNAT) pool that contains multiple IP addresses. The connection error looks like this:
 
