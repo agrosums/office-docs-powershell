@@ -51,6 +51,7 @@ Set-Mailbox [-Identity] <MailboxIdParameter>
  [-CalendarLoggingQuota <Unlimited>]
  [-CalendarRepairDisabled <Boolean>]
  [-CalendarVersionStoreDisabled <Boolean>]
+ [-ClearThrottlingPolicyAssignment <Boolean>]
  [-ClientExtensions <Boolean>]
  [-Confirm]
  [-CreateDTMFMap <Boolean>]
@@ -228,7 +229,7 @@ Set-Mailbox [-Identity] <MailboxIdParameter>
  [-BypassModerationFromSendersOrMembers <MultiValuedProperty>]
  [-CalendarRepairDisabled <Boolean>]
  [-CalendarVersionStoreDisabled <Boolean>]
- [-ClearThrottlingPolicyAssignment]
+ [-ClearThrottlingPolicyAssignment <Boolean>]
  [-Confirm]
  [-CreateDTMFMap <Boolean>]
  [-CustomAttribute1 <String>]
@@ -359,7 +360,7 @@ Set-Mailbox [-Identity] <MailboxIdParameter>
  [-BypassModerationFromSendersOrMembers <MultiValuedProperty>]
  [-CalendarRepairDisabled <Boolean>]
  [-CalendarVersionStoreDisabled <Boolean>]
- [-ClearThrottlingPolicyAssignment]
+ [-ClearThrottlingPolicyAssignment <Boolean>]
  [-Confirm]
  [-CreateDTMFMap <Boolean>]
  [-CustomAttribute1 <String>]
@@ -490,7 +491,7 @@ Set-Mailbox [-Identity] <MailboxIdParameter>
  [-BypassModerationFromSendersOrMembers <MultiValuedProperty>]
  [-CalendarRepairDisabled <Boolean>]
  [-CalendarVersionStoreDisabled <Boolean>]
- [-ClearThrottlingPolicyAssignment]
+ [-ClearThrottlingPolicyAssignment <Boolean>]
  [-Confirm]
  [-CreateDTMFMap <Boolean>]
  [-CustomAttribute1 <String>]
@@ -621,7 +622,7 @@ Set-Mailbox [-Identity] <MailboxIdParameter>
  [-BypassModerationFromSendersOrMembers <MultiValuedProperty>]
  [-CalendarRepairDisabled <Boolean>]
  [-CalendarVersionStoreDisabled <Boolean>]
- [-ClearThrottlingPolicyAssignment]
+ [-ClearThrottlingPolicyAssignment <Boolean>]
  [-Confirm]
  [-CreateDTMFMap <Boolean>]
  [-CustomAttribute1 <String>]
@@ -751,7 +752,7 @@ Set-Mailbox [-Identity] <MailboxIdParameter>
  [-BypassModerationFromSendersOrMembers <MultiValuedProperty>]
  [-CalendarRepairDisabled <Boolean>]
  [-CalendarVersionStoreDisabled <Boolean>]
- [-ClearThrottlingPolicyAssignment]
+ [-ClearThrottlingPolicyAssignment <Boolean>]
  [-CreateDTMFMap <Boolean>]
  [-CustomAttribute1 <String>]
  [-CustomAttribute10 <String>]
@@ -880,7 +881,7 @@ Set-Mailbox [-Identity] <MailboxIdParameter>
  [-BypassModerationFromSendersOrMembers <MultiValuedProperty>]
  [-CalendarRepairDisabled <Boolean>]
  [-CalendarVersionStoreDisabled <Boolean>]
- [-ClearThrottlingPolicyAssignment]
+ [-ClearThrottlingPolicyAssignment <Boolean>]
  [-Confirm]
  [-CreateDTMFMap <Boolean>]
  [-CustomAttribute1 <String>]
@@ -1010,7 +1011,7 @@ Set-Mailbox [-Identity] <MailboxIdParameter>
  [-BypassModerationFromSendersOrMembers <MultiValuedProperty>]
  [-CalendarRepairDisabled <Boolean>]
  [-CalendarVersionStoreDisabled <Boolean>]
- [-ClearThrottlingPolicyAssignment]
+ [-ClearThrottlingPolicyAssignment <Boolean>]
  [-Confirm]
  [-CreateDTMFMap <Boolean>]
  [-CustomAttribute1 <String>]
@@ -1963,7 +1964,9 @@ Accept wildcard characters: False
 ### -ClearThrottlingPolicyAssignment
 This parameter is available only in the cloud-based service.
 
-{{ Fill ClearThrottlingPolicyAssignment Description }}
+The ClearThrottlingPolicyAssignment parameter specifies whether to clear any throttling policy assignments for the mailbox. When contacted, Microsoft Support can help assign a throttling policy to a given mailbox, in order to change the default throttling limits for various protocols. To revert those changes, leverage this parameter.
+
+Valid values are $true or $false.
 
 ```yaml
 Type: SwitchParameter
